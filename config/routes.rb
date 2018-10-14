@@ -16,13 +16,17 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :orders
-  resources :line_items
-  resources :carts
-  root 'store#index', as: 'store_index'
-
   resources :products do
     get :who_bought, on: :member
+  end
+
+  scope '(:locale)' do
+    resources :orders
+    resources :line_items
+    resources :carts
+    # HTTP 方法约束
+    # via: :all 相当于这个action 匹配所有 http 请求，get、post、put、patch 和 delete
+    root 'store#index', as: 'store_index', via: :all # 可替代 via: [:get, :post]
   end
 
   # For details on the DSL available within this file, see

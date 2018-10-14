@@ -10,6 +10,8 @@ require_relative 'boot'
 
 require 'rails/all'
 
+ # 清除了在运行 rails test 时候 出现大量的DEPRECATION WARNING
+ActiveSupport::Deprecation.silenced = true
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
